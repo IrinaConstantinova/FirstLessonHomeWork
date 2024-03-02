@@ -1,4 +1,4 @@
-package clients;
+package vetClinic.clients;
 
 public class Owner {
 

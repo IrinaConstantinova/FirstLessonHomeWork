@@ -1,7 +1,14 @@
-import clients.*;
+import vetClinic.clients.*;
+import vetClinic.clients.impl.*;
+import vetClinic.personal.Healable;
+import vetClinic.personal.impl.Doctor;
+import vetClinic.personal.impl.Nurse;
+import vetClinic.personal.Personal;
+import vetClinic.veterinaryClinic.VeterinaryClinic;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -16,41 +23,59 @@ public class Main {
         Animal funny = new Duck("Funny", 1.5f, LocalDate.now(), new Owner("Elza"),"white", 0.36f);
         Animal puffy = new Rabbit("Puffy", 2, LocalDate.now(), new Owner("Oleg"),"brown", 0.23f);
         Animal kitty = new Cat("Kitty", 4, LocalDate.now(), new Owner("Elena"), "gray", 0.32f);
+        Animal sam = new Parrot("Sam", 0.50f, LocalDate.now(), new Owner("Lana"), "blue");
 
-        List<Animal> animals = new ArrayList<>();
-        animals.add(leva);
-        animals.add(kuzea);
-        animals.add(laika);
-        animals.add(frank);
-        animals.add(goldy);
-        animals.add(george);
-        animals.add(funny);
-        animals.add(puffy);
-        animals.add(kitty);
-        System.out.println(animals);
+        Personal fiona = new Nurse("Fiona", 1, "Chief nurse");
+        Personal anna = new Nurse("Anna", 3, "Assistant surgeon");
+        Personal alan = new Doctor("Alan", 2, "Chief doctor");
+        Personal dana = new Doctor("Dana", 4, "Doctor");
+        Doctor alf = new Doctor("Bil", 6, "Doctor");
+        Nurse nora= new Nurse("Nora", 8, "Junior nurse");
 
-//        System.out.println(leva);
-//        System.out.println(kuzea);
-//        System.out.println(laika);
-//        System.out.println(frank);
-//        System.out.println(goldy);
-//        System.out.println(george);
-//        System.out.println(funny);
-//        System.out.println(puffy);
-//        System.out.println(kitty);
-        System.out.println("---------------");
-        Animal testLion = new Lion();
-        Animal testDog = new Dog();
-        System.out.println(testLion);
-        System.out.println(testDog);
-        System.out.println("---------------");
+        VeterinaryClinic clinic = new VeterinaryClinic();
+
+        clinic.addPersonal(alf);
+        clinic.addPersonal(nora);
+        clinic.addPersonal(fiona);
+        clinic.addPersonal(anna);
+        clinic.addPersonal(alan);
+        clinic.addPersonal(dana);
+
+        System.out.println(clinic.getPersonals());
+        System.out.println("---------------------");
+
+        clinic.removePersonal(fiona);
+        System.out.println(clinic.getPersonals());
+        System.out.println("--------------------");
+
+        clinic.addAnimalToClinic(sam);
+        clinic.addAnimalToClinic(kitty);
+        clinic.addAnimalToClinic(puffy);
+        clinic.addAnimalToClinic(funny);
+        clinic.addAnimalToClinic(george);
+        clinic.addAnimalToClinic(goldy);
+        clinic.addAnimalToClinic(frank);
+        clinic.addAnimalToClinic(laika);
+        clinic.addAnimalToClinic(kuzea);
+        clinic.addAnimalToClinic(leva);
+        System.out.println(clinic.getAnimals());
+        System.out.println("--------------------");
+
+        clinic.dischargeFromClinic(leva);
+        System.out.println(clinic.getAnimals());
+
+        System.out.println("--------------------");
         System.out.println(kitty);
-        kitty.liveCircle();
-        System.out.println("---------------");
-        kitty.toGo();
-        kitty.toFly();
-        kitty.toSwim();
+        alf.heal(kitty);
+        alf.prescribeDiagnose(kitty);
+        nora.vaccinate(kitty);
 
+        System.out.println("\n" + "Animals that can fly: " );
+        System.out.println(clinic.getFlyable());
+        System.out.println("\n" + "Animals that can run: ");
+        System.out.println(clinic.getRunable());
+        System.out.println("\n" + "Animals that can swim: ");
+        System.out.println(clinic.getSwimmable());
 
 
     }
