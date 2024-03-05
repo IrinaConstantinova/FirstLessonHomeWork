@@ -2,7 +2,9 @@ package vetClinic.veterinaryClinic;
 
 import vetClinic.clients.*;
 import vetClinic.clients.impl.Cat;
+import vetClinic.personal.Healable;
 import vetClinic.personal.Personal;
+import vetClinic.personal.Treatable;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -70,4 +72,13 @@ public class VeterinaryClinic {
         }
         return flyableList;
     }
+    public List<Personal> getDoctors(){
+        List<Personal> doctors = personals.stream().filter(doctor -> doctor instanceof Healable).collect(Collectors.toList());
+        return doctors;
+    }
+    public List<Personal> getNurses(){
+        List<Personal> nurses = personals.stream().filter(nurse -> nurse instanceof Treatable).collect(Collectors.toList());
+        return nurses;
+    }
+
 }
